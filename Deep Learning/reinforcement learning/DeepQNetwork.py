@@ -72,7 +72,7 @@ class DeepQNetwork(nn.Module):
 		self.activate = nn.ReLU()
 		self.lr_adjuster = SnapshotLR(initial_lr = lr, iteration_type = 'mini_batch', max_lr = lr, total_iters = n_games * 100, n_cycles = n_games)
 		self.optimizer = optim.Adam(self.parameters(), lr = lr, weight_decay = 1e-5, amsgrad = True)
-		self.lr_scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size = n_games // 3, gamma = 0.1)
+		self.lr_scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size = n_games // 2, gamma = 0.1)
 		self.mseloss = nn.MSELoss()
 		self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 		self.to(self.device)
@@ -98,7 +98,7 @@ class Agent():
 		self.batch_size = batch_size
 		self.mem_counter = 0
 		self.Q_eval = DeepQNetwork(lr = lr, n_actions = n_actions, 
-								input_channels = input_channels, fc_dims = [128, 256, 512, 1024], n_games = n_games)
+								input_channels = input_channels, fc_dims = [256, 512, 1024, 2048], n_games = n_games)
 		self.state_mem = np.zeros((self.mem_size, input_channels), dtype = np.float32)
 		self.new_state_mem = np.zeros((self.mem_size, input_channels), dtype = np.float32)
 		self.action_mem = np.zeros(self.mem_size, dtype = np.int32)

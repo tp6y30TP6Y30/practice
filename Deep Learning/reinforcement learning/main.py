@@ -5,8 +5,8 @@ import numpy as np
 
 if __name__ == '__main__':
 	env = gym.make('LunarLander-v2')
-	n_games = 2000
-	agent = Agent(gamma = 0.99, epsilon = 0.5, batch_size = 8192, n_actions = 4,
+	n_games = 1000
+	agent = Agent(gamma = 0.99, epsilon = 1.0, batch_size = 8192, n_actions = 4,
 				  eps_end = 0.01, input_channels = 8, lr = 0.0001, n_games = n_games)
 	scores, eps_histroy = [], []
 	for i in range(1, n_games + 1):
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 				still_open = env.render()
 				if still_open == False: break
 		agent.Q_eval.lr_scheduler.step()
-		if i % (n_games // 3) == 0:
+		if i % (n_games // 2) == 0:
 			agent.Q_eval.lr_adjuster.max_lr *= 0.1
 		scores.append(score)
 		eps_histroy.append(agent.epsilon)
