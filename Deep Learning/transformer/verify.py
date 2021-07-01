@@ -48,6 +48,7 @@ res_o = model_official(inp)
 
 # Asserts
 assert get_n_params(model_custom) == get_n_params(model_official)
+print(get_n_params(model_custom))
 assert_tensors_equal(res_c, res_o)
 
 # Save custom model
