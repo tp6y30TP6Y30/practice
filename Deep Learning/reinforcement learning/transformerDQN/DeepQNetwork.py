@@ -184,7 +184,7 @@ class Agent():
         self.mem_counter = 0
         self.transformerQ_eval = transformer_DQNetwork(lr = lr, input_channels = input_channels, embed_dim = 512, n_patches = 1, 
                                                        pos_p = 0.2, n_heads = 4, qkv_bias = True, mlp_ratio = 4.0, attn_p = 0.3, proj_p = 0.3,
-                                                       depth = 4, n_games = n_games, n_actions = n_actions)
+                                                       depth = 7, n_games = n_games, n_actions = n_actions)
 
         self.state_mem = np.zeros((self.mem_size, input_channels), dtype = np.float32)
         self.new_state_mem = np.zeros((self.mem_size, input_channels), dtype = np.float32)
