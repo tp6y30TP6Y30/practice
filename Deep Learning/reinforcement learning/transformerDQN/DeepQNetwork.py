@@ -159,8 +159,8 @@ class transformer_DQNetwork(nn.Module):
 
         cls_token = self.cls_token.expand(batch_size, -1, -1)
         x = torch.cat([cls_token, x], dim = 1)
-        x = x + self.pos_embed
-        x = self.pos_drop(x)
+        # x = x + self.pos_embed
+        # x = self.pos_drop(x)
 
         for block in self.blocks:
             x = block(x)
@@ -183,7 +183,7 @@ class Agent():
         self.batch_size = batch_size
         self.mem_counter = 0
         self.transformerQ_eval = transformer_DQNetwork(lr = lr, input_channels = input_channels, embed_dim = 512, n_patches = 1, 
-                                                       pos_p = 0.2, n_heads = 4, qkv_bias = True, mlp_ratio = 4.0, attn_p = 0.3, proj_p = 0.3,
+                                                       pos_p = 0., n_heads = 4, qkv_bias = True, mlp_ratio = 4.0, attn_p = 0., proj_p = 0.,
                                                        depth = 7, n_games = n_games, n_actions = n_actions)
 
         self.state_mem = np.zeros((self.mem_size, input_channels), dtype = np.float32)

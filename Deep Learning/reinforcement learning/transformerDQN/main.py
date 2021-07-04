@@ -5,7 +5,7 @@ import numpy as np
 
 if __name__ == '__main__':
 	env = gym.make('LunarLander-v2')
-	n_games = 1000
+	n_games = 2000
 	agent = Agent(gamma = 0.99, epsilon = 1.0, lr = 0.0001, input_channels = 8, 
 				  batch_size = 8192, n_games = n_games, n_actions = 4, eps_end = 0.01)
 	scores, eps_histroy = [], []
